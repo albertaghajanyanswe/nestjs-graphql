@@ -1,0 +1,55 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type UsersDTO {
+  id: Float
+  fullName: String
+  firstName: String
+  lastName: String
+  email: String
+  username: String
+  password: String
+  role: String
+}
+
+type AuthResponseDTO {
+  token: String
+  user: UsersDTO
+}
+
+type Query {
+  getAllUsers: [UsersDTO!]!
+}
+
+type Mutation {
+  createUser(user: UsersInput!): UsersDTO!
+  addUser(user: UsersInput!): UsersDTO!
+  editUser(user: EditUserInput!): UsersDTO!
+  login(authLogin: AuthLogin!): AuthResponseDTO!
+  defaultLogin(authLogin: AuthLogin!): AuthResponseDTO!
+}
+
+input UsersInput {
+  firstName: String!
+  lastName: String!
+  email: String
+  username: String
+  role: String
+  password: String!
+}
+
+input EditUserInput {
+  id: Float
+  firstName: String
+  lastName: String
+  email: String
+  username: String
+  role: String
+  password: String
+}
+
+input AuthLogin {
+  email: String
+  password: String!
+}
