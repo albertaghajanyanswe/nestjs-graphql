@@ -1,0 +1,51 @@
+input AuthLogin {
+  email: String
+  password: String!
+}
+
+type AuthResponseDTO {
+  token: String
+  user: UsersDTO
+}
+
+input EditUserInput {
+  email: String
+  firstName: String
+  id: Float
+  lastName: String
+  password: String
+  role: String
+  username: String
+}
+
+type Mutation {
+  addUser(user: UsersInput!): UsersDTO!
+  createUser(user: UsersInput!): UsersDTO!
+  defaultLogin(authLogin: AuthLogin!): AuthResponseDTO!
+  editUser(user: EditUserInput!): UsersDTO!
+  login(authLogin: AuthLogin!): AuthResponseDTO!
+}
+
+type Query {
+  getAllUsers: [UsersDTO!]!
+}
+
+type UsersDTO {
+  email: String
+  firstName: String
+  fullName: String
+  id: Float
+  lastName: String
+  password: String
+  role: String
+  username: String
+}
+
+input UsersInput {
+  email: String
+  firstName: String!
+  lastName: String!
+  password: String!
+  role: String
+  username: String
+}

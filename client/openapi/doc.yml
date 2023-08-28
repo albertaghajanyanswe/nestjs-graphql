@@ -1,0 +1,25 @@
+openapi: 3.0.0
+paths:
+  /:
+    get:
+      operationId: AppController_getHello
+      parameters: []
+      responses:
+        '200':
+          description: ''
+info:
+  title: Swagger API
+  description: Users Auth and other stuff
+  version: 1.0.0
+  contact: {}
+tags:
+  - name: Users
+    description: ''
+servers: []
+components:
+  securitySchemes:
+    bearer:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http
+  schemas: {}
