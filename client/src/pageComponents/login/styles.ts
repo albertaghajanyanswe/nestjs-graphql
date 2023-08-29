@@ -1,12 +1,13 @@
 // todo: add and using all variables from theme
 import { Theme } from "@mui/system";
 
-const styles = (theme: Theme) => ({
+const stylesWithTheme = (theme: Theme) => ({
   container: {
     margin: 'auto',
     marginTop: '7%',
     width: 'auto',
     borderRadius: '4px',
+    textAlign: 'center',
     [theme.breakpoints.up(350)]: {
       width: 350,
       marginLeft: "auto",
@@ -26,10 +27,14 @@ const styles = (theme: Theme) => ({
     fontWeight: '600',
     textDecoration: 'unset',
     alignSelf: 'center',
+    color: theme.palette.primary.blue3,
+    '&:hover': {
+      color: theme.palette.primary.main,
+    }
   },
   submit: {
     height: 50,
   },
 });
 
-export default styles;
+export {stylesWithTheme};

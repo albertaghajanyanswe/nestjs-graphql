@@ -1,4 +1,4 @@
-import M from 'messages';
+import M from '../messages';
 import moment from 'moment';
 
 const getMessage = (error, variant = 'success') => {

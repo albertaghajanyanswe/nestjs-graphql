@@ -116,7 +116,20 @@ const en = {
   },
   validation: {
     required: '{name} is required'
-  }
+  },
+  errors: {
+    required: '{field} field is required.',
+    minChars: '{field} min length should be {count} character.',
+    maxValue: '{field} max value should be {maxValue}.',
+    greaterZero: '{field} value must be greater than zero.',
+    incorrectEmail: 'Incorrect email format.',
+    noUploadedFiles: 'No uploaded files',
+    passwordMismatches: "Password confirmation doesn't match.",
+    fileSizeLimit: 'Max file size should be 10 mb',
+    invalidDate: 'Invalid date.',
+    invalidPhone: 'Invalid phone number.',
+    passwordRequirements: 'The entered password does not match the requirements.',
+  },
 };
 
 export { en };

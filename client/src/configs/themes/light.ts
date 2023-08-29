@@ -7,6 +7,11 @@ declare module '@mui/material/styles' {
     warning?: string;
     success?: string;
     info?: string;
+    blue1?: string;
+    blue2?: string;
+    blue3?: string;
+    blue4?: string;
+    blue5?: string;
   }
 
   // eslint-disable-next-line no-unused-vars
@@ -15,6 +20,11 @@ declare module '@mui/material/styles' {
     warning?: string;
     success?: string;
     info?: string;
+    blue1?: string;
+    blue2?: string;
+    blue3?: string;
+    blue4?: string;
+    blue5?: string;
   }
 }
 
@@ -32,6 +42,11 @@ const Default = (): DefaultPaletteOptions => {
       warning: '#E99800',
       success: '#21a900',
       info: '#096C7C',
+      blue1: '#CFE3F2',
+      blue2: '#1976d2',
+      blue3: '#457BAC',
+      blue4: '#226395',
+      blue5: '#004B7F',
     },
     secondary: {
       main: '#E5AF6C',
@@ -39,6 +54,11 @@ const Default = (): DefaultPaletteOptions => {
       warning: '##ffcf40',
       success: '#00ff2a',
       info: '#096C7C',
+      blue1: '#CFE3F2',
+      blue2: '#1976d2',
+      blue3: '#457BAC',
+      blue4: '#226395',
+      blue5: '#004B7F',
     },
   };
 };
