@@ -10,6 +10,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalInterceptors(new LoggingInterceptor());
   app.useGlobalPipes(new ValidationPipe());
+  // app.setGlobalPrefix("v1");
 
   const config = new DocumentBuilder()
     .setTitle("Swagger API")

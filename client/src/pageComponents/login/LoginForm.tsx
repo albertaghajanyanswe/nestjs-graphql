@@ -37,7 +37,7 @@ const LoginForm = FormHOC<iProps>(({ handleSubmit }) => {
       </Grid>
       <Grid item xs={12} sm={12}>
         <Form.TextField
-          rules={{ required: requiredErrMsg(M.get('login.password')), validate: validateEmail }}
+          rules={{ required: requiredErrMsg(M.get('login.password')) }}
           name="password"
           placeholder={M.get('login.password')}
           label={M.get('login.password')}

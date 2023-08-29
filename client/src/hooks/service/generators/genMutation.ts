@@ -58,7 +58,7 @@ export default function genMutation<Q, V extends Variables>({document, options, 
     const queryClient = useQueryClient()
     return useMutation<Q, unknown, V>(
       (async (...v: OptionalArgs<V>) => request<Q, V>(
-        '/api/proxy/graphql', 
+        '/graphql', 
         document,
         ...v
       )) as MutationFunction<Q, V>, 

@@ -12,6 +12,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import SystemMessage from '../../components/systemMessage';
 import { useSnackbar } from 'notistack';
 import LoginForm from './LoginForm';
+import { useLoginMutation } from '../../hooks/service/mutation/useLoginMutation';
 
 const DEFAULT_VALUES_LOGIN = {
   email: '',
@@ -35,6 +36,8 @@ const LoginPage = () => {
 
   const { handleSubmit, reset } = methods;
 
+  const { mutateAsync: mutateLogin, isLoading } = useLoginMutation();
+
   const handleCloseModal = () => {
     reset(DEFAULT_VALUES_LOGIN, { keepErrors: false, keepDirty: false });
   }
@@ -42,6 +45,10 @@ const LoginPage = () => {
   const handleSubmitLogin = useCallback(() => handleSubmit(async (data) => {
     try {
       console.log('handleSubmitLogin = ', data)
+      const res = await mutateLogin({
+         ...data
+      });
+      console.log('res = ', res)
       SystemMessage(enqueueSnackbar, getMessage('', 'success'), { variant: 'success' });
     } catch (error: any) {
       SystemMessage(enqueueSnackbar, getMessage(error?.response?.data || error.message), { variant: 'error' });

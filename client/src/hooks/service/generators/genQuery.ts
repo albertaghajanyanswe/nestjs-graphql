@@ -98,7 +98,7 @@ export default function genQuery<Q, V extends Variables, R>({document, getKey, o
   const useCustomQuery = (...v: OptionalArgsExt<V, UseQueryOptionsArg<Q, R>>) => useQuery<Q, any, R, unknown[]>(
     getKeyCur(...(v as OptionalArgs<PartialDeep<V>>)), 
     async () => request<Q, V>(
-      '/api/proxy/graphql', 
+      '/graphql', 
       document,
       ...(v as OptionalArgs<V>)
     ), 
@@ -113,7 +113,7 @@ export default function genQuery<Q, V extends Variables, R>({document, getKey, o
   }) => queryClient.prefetchQuery(
     getKeyCur(...[variables] as any), 
     async () => request<Q, V>({
-      url: (baseUrl||process.env.NEXT_PUBLIC_API_URL||"") + '/api/proxy/graphql',
+      url: (baseUrl||process.env.NEXT_PUBLIC_API_URL||"") + '/graphql',
       document,
       requestHeaders,
       ...({variables} as any)

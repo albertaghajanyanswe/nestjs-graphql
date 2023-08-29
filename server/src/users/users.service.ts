@@ -9,13 +9,14 @@ import { ErrorService } from "../utils/error/error.service";
 import { ErrorCodes } from "../utils/error/error.code";
 import { UsersRoleType } from "./enum/users.role.type";
 import * as bcrypt from "bcrypt";
+import { hash, compare } from "../utils/crypt";
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(UsersModel)
     private usersRepository: Repository<UsersModel>,
-  ) {}
+  ) { }
 
   async createUser(data: UsersInput): Promise<UsersModel> {
     const saltOrRounds = 10;
@@ -74,13 +75,18 @@ export class UsersService {
 
   async checkUser(data): Promise<UsersModel> {
     // eslint-disable-next-line prefer-const
-    console.log('data = ', data)
-    let { email, password } = data;
-    email = email?.toLowerCase();
+    console.log("data = ", data);
+    const { email, password } = data;
     const user = await this.usersRepository.findOne({
-      where: { email, password },
+      where: { email },
     });
     if (!user) {
+      throw new ErrorService({
+        error: ErrorCodes.INCORRECT_CREDENTIALS,
+      });
+    }
+    const validPassword = await compare(password, user.password);
+    if (!validPassword) {
       throw new ErrorService({
         error: ErrorCodes.INCORRECT_CREDENTIALS,
       });

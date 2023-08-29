@@ -119,7 +119,7 @@ export default function genInfiniteQuery<Q, V extends Variables, R>({ document, 
         const allArgs = [...v]
         allArgs[0] = { ...allArgs[0], ...pageParam }
         return request<Q, V>(
-          '/api/proxy/graphql',
+          '/graphql',
           document,
           ...(allArgs as OptionalArgs<V>)
         )
@@ -144,7 +144,7 @@ export default function genInfiniteQuery<Q, V extends Variables, R>({ document, 
   }) => queryClient.prefetchQuery(
     getKeyCur(...[variables] as any),
     async ({ pageParam }) => request<Q, V>({
-      url: (process.env.NEXT_PUBLIC_API_URL || "") + '/api/proxy/graphql',
+      url: (process.env.NEXT_PUBLIC_API_URL || "") + '/graphql',
       document,
       requestHeaders,
       ...({ variables: { ...variables, ...pageParam } } as any)

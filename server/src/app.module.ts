@@ -8,6 +8,7 @@ import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
 import * as ormconfig from "../ormconfig";
 import { UsersModule } from "./users/users.module";
 import { AuthModule } from "./auth/auth.module";
+import { RouterModule } from "@nestjs/core";
 
 @Module({
   imports: [
