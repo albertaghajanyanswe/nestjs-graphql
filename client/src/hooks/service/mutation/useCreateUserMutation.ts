@@ -1,6 +1,5 @@
 import { graphql } from "../../../gql";
 import genMutation from "../generators/genMutation";
-import { useGetUsersQuery } from "../query/useGetUsersQuery";
 
 export const useCreateUserMutation = genMutation({
   document: graphql(/* GraphQL */ `
@@ -16,9 +15,9 @@ export const useCreateUserMutation = genMutation({
       }
     }
   `),
-  onSuccess(queryClient, data, vairables) {
-    queryClient.invalidateQueries(
-      useGetUsersQuery.getKey({})
-    )
-  }
+  // onSuccess(queryClient, data, vairables) {
+  //   queryClient.invalidateQueries(
+  //     useGetUsersQuery.getKey({})
+  //   )
+  // }
 })

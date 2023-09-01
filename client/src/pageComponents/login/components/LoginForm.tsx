@@ -1,10 +1,11 @@
 import React from 'react';
 import { Box, Grid } from '@mui/material';
-import M from '../../../src/messages'
-import CustomButton from '../../components/button';
-import { isEmail, requiredErrMsg } from '../../helpers/formHelper';
-import { iLogin } from '../../configs/shared/types';
-import StepHOC from '../../components/FormHOC';
+import M from '../../../messages'
+import CustomButton from '../../../components/button';
+import { isEmail, requiredErrMsg } from '../../../helpers/formHelper';
+import { iLogin } from '../../../configs/shared/types';
+import StepHOC from '../../../components/FormHOC';
+import { useLocation } from 'react-router-dom';
 
 
 interface iProps {

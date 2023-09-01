@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Button, Box, Grid, Typography, useTheme } from '@mui/material';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -7,51 +7,75 @@ import Switch from '@mui/material/Switch';
 import M from '../../messages';
 import stylesCallback from "./styles";
 import { routes } from '../../configs';
+import RegistrationForm from './components/RegistrationForm';
+import { FormProvider, useForm } from 'react-hook-form';
+import { useCreateUserMutation } from '../../hooks/service/mutation/useCreateUserMutation';
+import SystemMessage from '../../components/systemMessage';
+import { useSnackbar } from 'notistack';
+import { getMessage } from '../../helpers/helper';
+
+const DEFAULT_VALUES_REGISTRATION = {
+  firstName: '',
+  lastName: '',
+  username: '',
+  email: '',
+  password: ''
+}
 
 const RegistrationPage = () => {
   const theme = useTheme();
+  const { enqueueSnackbar } = useSnackbar();
 
   const styles = stylesCallback(theme);
   const navigate = useNavigate();
-  const location = useLocation();
+  // const location = useLocation();
 
-  const [switchGuest, setSwitchGuest] = useState(false);
+  const methods = useForm({
+    defaultValues: DEFAULT_VALUES_REGISTRATION,
+    mode: 'onChange'
+  });
 
-  const asGuest = location?.pathname?.includes('/guest');
-  const initialValues = asGuest ? {nickName: '', password: ''} : switchGuest ? { firstName: '', lastName: '', nickName: '', password: '' } : { firstName: '', lastName: '', email: '', password: '' };
+  const { handleSubmit, reset } = methods;
 
+  const { mutateAsync: mutateRegister, isLoading } = useCreateUserMutation();
 
-  const handleSwitchGuest = () => {
-    setSwitchGuest((prev) => !prev);
+  const handleCloseModal = () => {
+    reset(DEFAULT_VALUES_REGISTRATION, { keepErrors: false, keepDirty: false });
   }
+
+  const handleSubmitRegistration = useCallback(() => handleSubmit(async (data) => {
+    try {
+      console.log('handleSubmitRegistration = ', data)
+      const res = await mutateRegister({
+        ...data
+      });
+      SystemMessage(enqueueSnackbar, getMessage('', 'success'), { variant: 'success' });
+      navigate(routes.login.path)
+    } catch (error: any) {
+      SystemMessage(enqueueSnackbar, getMessage(error?.response?.data || error.message), { variant: 'error' });
+    }
+    return true
+  }), []);
 
   return (
     <Box sx={styles.container} p={4}>
-      <form autoComplete="off">
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <Typography color="primary" variant="h5"> {M.get('register.title')} </Typography>
+      <FormProvider {...methods}>
+        <form noValidate autoComplete="off">
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <Typography color="primary" variant="h5"> {M.get('register.title')} </Typography>
+                </Grid>
+                <RegistrationForm handleSubmit={handleSubmitRegistration} />
               </Grid>
-              {!asGuest && <Grid item xs={12}>
-                <FormControlLabel name="switchGuestAccount" checked={switchGuest} onClick={handleSwitchGuest} control={<Switch />} label={M.get('register.switchGuest')} />
-              </Grid>}
-              FORM
+            </Grid>
+            <Grid item xs={12}>
+              <Box component={Link} sx={styles.link} to={routes.login.path}> {"<"} {M.get('register.backToLogin')} </Box>
             </Grid>
           </Grid>
-          <Grid item xs={12}>
-            <Button color="primary" variant="contained" fullWidth type="submit" sx={styles.submit}>
-              {M.get('register.submit')}
-            </Button>
-          </Grid>
-          <Grid item xs={12}>
-            <Box sx={styles.description}>
-              <Box component={Link} sx={styles.link} to={routes.login.path}> {"<"} {M.get('register.backToLogin')} </Box>
-            </Box>
-          </Grid>
-        </Grid>
-      </form>
+        </form>
+      </FormProvider>
     </Box>
   );
 };

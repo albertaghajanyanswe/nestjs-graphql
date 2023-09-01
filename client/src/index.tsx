@@ -6,6 +6,8 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import CustomThemeProvider from '../src/configs/themes/CustomThemeProvider';
 import { Hydrate, QueryCache, QueryClient, QueryClientProvider, useQueryClient } from "@tanstack/react-query";
+import { Box } from '@mui/material';
+import { SnackbarProvider } from 'notistack';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -13,9 +15,21 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-    <CustomThemeProvider>
-      <App />
-    </CustomThemeProvider>
+      <CustomThemeProvider>
+        <Box
+          sx={{ justifyContent: 'center' }}
+          component={SnackbarProvider}
+          autoHideDuration={5000}
+          hideIconVariant
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'right',
+          }}
+          maxSnack={4}
+        >
+          <App />
+        </Box>
+      </CustomThemeProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

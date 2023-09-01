@@ -5,6 +5,7 @@ const getMessage = (error, variant = 'success') => {
 	const message = error && error.message ?
 		error.message : error && error.error ? error.error : variant === 'error' ?
 			M.get('actionMsg.error.unknownError') : M.get('actionMsg.success.operationSucceeded')
+  console.log('message = ', message)
 	return message;
 }
 

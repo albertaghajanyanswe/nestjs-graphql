@@ -18,6 +18,9 @@ const en = {
     },
     registerGuest: 'Register as a guest',
     nickName: 'Nick name',
+    firstName: 'First name',
+    lastName: 'Last name',
+
   },
   register: {
     title: 'Registration',
@@ -83,6 +86,7 @@ const en = {
   actions: {
     login: 'Login',
     signIn: 'Sign In',
+    signOut: 'Sign Out',
     cancel: 'Cancel',
     submit: 'Submit',
     search: 'Search',

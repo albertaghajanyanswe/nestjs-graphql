@@ -6,6 +6,8 @@ import LoginPage from './pageComponents/login/LoginPage';
 import RegistrationPage from './pageComponents/registration/RegistrationPage';
 import { routes } from './configs';
 import { Hydrate, QueryCache, QueryClient, QueryClientProvider, useQueryClient } from "@tanstack/react-query";
+import PrivateRoute from './PrivateRoute';
+import HomePage from './pageComponents/home/HomePage';
 
 function App() {
   const router = useLocation();
@@ -28,6 +30,14 @@ function App() {
         <Route path={routes.loginGuest.path} element={<LoginPage />} />
         <Route path={routes.registration.path} element={<RegistrationPage />} />
         <Route path={routes.registrationGuest.path} element={<RegistrationPage />} />
+        <Route
+          path={routes.home.path}
+          element={
+            <PrivateRoute>
+              <HomePage />
+            </PrivateRoute>
+          }
+        />
 
         <Route path="**" element={<>Not found</>} />
       </Routes>

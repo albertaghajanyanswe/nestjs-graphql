@@ -11,8 +11,9 @@ import { useTheme } from '@mui/material';
 import { FormProvider, useForm } from 'react-hook-form';
 import SystemMessage from '../../components/systemMessage';
 import { useSnackbar } from 'notistack';
-import LoginForm from './LoginForm';
+import LoginForm from './components/LoginForm';
 import { useLoginMutation } from '../../hooks/service/mutation/useLoginMutation';
+import { lsConstants } from '../../constants/constants';
 
 const DEFAULT_VALUES_LOGIN = {
   email: '',
@@ -26,8 +27,6 @@ const LoginPage = () => {
   const styles = stylesWithTheme(theme);
   const navigate = useNavigate();
   const location = useLocation();
-
-  const asGuest = location.pathname.includes('/guest');
 
   const methods = useForm({
     defaultValues: DEFAULT_VALUES_LOGIN,
@@ -46,10 +45,13 @@ const LoginPage = () => {
     try {
       console.log('handleSubmitLogin = ', data)
       const res = await mutateLogin({
-         ...data
+        ...data
       });
+      localStorage.setItem(lsConstants.CURRENT_USER, JSON.stringify(res));
+
       console.log('res = ', res)
       SystemMessage(enqueueSnackbar, getMessage('', 'success'), { variant: 'success' });
+      navigate(routes.home.path)
     } catch (error: any) {
       SystemMessage(enqueueSnackbar, getMessage(error?.response?.data || error.message), { variant: 'error' });
     }
@@ -66,14 +68,8 @@ const LoginPage = () => {
             </Grid>
             <LoginForm handleSubmit={handleSubmitLogin} />
             <Grid item xs={12}>
-              <Box component={Link} sx={styles.link} to={routes.loginGuest.path}> {M.get('login.signInGuest')}</Box>
-            </Grid>
-            <Grid item xs={12}>
               {M.get('login.createAccount')}
               <Box component={Link} sx={styles.link} to={routes.registration.path}> {M.get('login.register')}</Box>
-            </Grid>
-            <Grid item xs={12}>
-              <Box component={Link} sx={styles.link} to={routes.registrationGuest.path}> {M.get('login.registerGuest')} </Box>
             </Grid>
           </Grid>
         </form>
