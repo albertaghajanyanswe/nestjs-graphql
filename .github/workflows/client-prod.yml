@@ -22,7 +22,7 @@ jobs:
       - name: show files
         run: ls
       - name: install modules
-        run: npm install
+        run: npm ci
       - name: build project
         run: npm run build
       - name: unit test
