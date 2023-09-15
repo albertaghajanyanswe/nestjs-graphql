@@ -13,8 +13,8 @@ import FormFieldTitle from '../fieldTitle';
 import { useTheme } from '@mui/material';
 import { Theme } from '@mui/system';
 
-interface iFormTextField {
-  name: string;
+interface iFormTextField<T> {
+  name: Path<T>;
   placeholder: string;
   label: string;
   rules?: any;
@@ -23,11 +23,13 @@ interface iFormTextField {
   sx?: any;
   sxContainer?: any;
   sxDescription?: any;
+  sxTitle?: any;
   size?: 'small' | 'medium';
   withoutLabel?: boolean;
   multiline?: boolean;
   rows?: number;
   startIcon?: any;
+  endIcon?: any;
   autoComplete?: string;
   withHelperText?: boolean;
   withEyeIcon?: boolean;
@@ -37,9 +39,12 @@ interface iFormTextField {
   description?: string | React.ReactNode;
   borderRadius?: number;
   disabled?: boolean;
+  showInputErrorIcon?: boolean;
   sxTooltip?: any;
+  defaultValue?: string;
   isArabicInput?: boolean;
   insideSpan?: boolean;
+  pattern?: string | RegExp;
 }
 
 const FormTextField = <T extends FieldValues>({
@@ -74,39 +79,7 @@ const FormTextField = <T extends FieldValues>({
   isArabicInput = false,
   insideSpan = false,
   pattern,
-}: {
-  name: Path<T>;
-  placeholder: string;
-  label: string;
-  rules?: any;
-  variant?: 'filled' | 'outlined' | 'standard';
-  type?: string
-  sx?: any;
-  sxContainer?: any;
-  sxDescription?: any;
-  sxTitle?: any;
-  size?: 'small' | 'medium';
-  withoutLabel?: boolean;
-  multiline?: boolean;
-  rows?: number;
-  startIcon?: any;
-  endIcon?: any;
-  autoComplete?: string;
-  withHelperText?: boolean;
-  withEyeIcon?: boolean;
-  eyeIconSize?: 16 | 24;
-  title?: string;
-  helperTooltip?: string;
-  description?: string | React.ReactNode;
-  borderRadius?: number;
-  disabled?: boolean;
-  showInputErrorIcon?: boolean;
-  sxTooltip?: any;
-  defaultValue?: string;
-  isArabicInput?: boolean;
-  insideSpan?: boolean;
-  pattern?: string | RegExp;
-}) => {
+}: iFormTextField<T>) => {
   const { field: { onChange, value, ref }, fieldState: { error } } = useController<T>({
     rules,
     name

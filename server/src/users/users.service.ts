@@ -46,9 +46,10 @@ export class UsersService {
   }
 
   async getAll(): Promise<UsersModel[]> {
-    return this.usersRepository.find({
-      where: { role: Not(UsersRoleType.SUPER_USER) },
-    });
+    // return this.usersRepository.find({
+    //   where: { role: Not(UsersRoleType.SUPER_USER) },
+    // });
+    return this.usersRepository.find();
   }
 
   async editUser(data: EditUserInput): Promise<UsersModel> {
