@@ -18,8 +18,10 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: cd client
         run: cd client
+      - name: show files
+        run: ls
       - name: install modules
-        run: npm ci
+        run: npm install
       - name: build project
         run: npm run build
       - name: unit test
