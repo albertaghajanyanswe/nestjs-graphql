@@ -1,8 +1,6 @@
-import React, { useCallback, useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Button, Box, Grid, Typography, useTheme } from '@mui/material';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
+import React, { useCallback } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Box, Grid, Typography, useTheme } from '@mui/material';
 
 import M from '../../messages';
 import stylesCallback from "./styles";
@@ -35,18 +33,18 @@ const RegistrationPage = () => {
     mode: 'onChange'
   });
 
-  const { handleSubmit, reset } = methods;
+  const { handleSubmit } = methods;
 
-  const { mutateAsync: mutateRegister, isLoading } = useCreateUserMutation();
+  const { mutateAsync: mutateRegister } = useCreateUserMutation();
 
-  const handleCloseModal = () => {
-    reset(DEFAULT_VALUES_REGISTRATION, { keepErrors: false, keepDirty: false });
-  }
+  // const handleCloseModal = () => {
+  //   reset(DEFAULT_VALUES_REGISTRATION, { keepErrors: false, keepDirty: false });
+  // }
 
   const handleSubmitRegistration = useCallback(() => handleSubmit(async (data) => {
     try {
       console.log('handleSubmitRegistration = ', data)
-      const res = await mutateRegister({
+      await mutateRegister({
         ...data
       });
       SystemMessage(enqueueSnackbar, getMessage('', 'success'), { variant: 'success' });
@@ -55,6 +53,7 @@ const RegistrationPage = () => {
       SystemMessage(enqueueSnackbar, getMessage(error?.response?.data || error.message), { variant: 'error' });
     }
     return true
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }), []);
 
   return (

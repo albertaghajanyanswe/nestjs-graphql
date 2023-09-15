@@ -1,16 +1,12 @@
 import React from 'react';
 import {
   Card,
-  CardMedia,
   CardContent,
   CardActions,
   Typography,
-  IconButton,
-  Button,
   useTheme,
   Box,
 } from '@mui/material';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 import { stylesWithTheme } from './styles';
 import { UsersData } from '../../../hooks/service/query/useGetUsersQuery';

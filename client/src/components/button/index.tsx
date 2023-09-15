@@ -3,7 +3,6 @@ import Button from '@mui/material/Button';
 
 import { stylesCallback } from './styles';
 import { LoadingButton } from '@mui/lab';
-import { Box } from '@mui/material';
 import { useTheme } from '@mui/material';
 
 interface iProps {

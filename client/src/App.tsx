@@ -1,16 +1,14 @@
-import React, { useState } from 'react';
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
-import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import LoginPage from './pageComponents/login/LoginPage';
 import RegistrationPage from './pageComponents/registration/RegistrationPage';
 import { routes } from './configs';
-import { Hydrate, QueryCache, QueryClient, QueryClientProvider, useQueryClient } from "@tanstack/react-query";
+import { QueryCache, QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import PrivateRoute from './PrivateRoute';
 import HomePage from './pageComponents/home/HomePage';
 
 function App() {
-  const router = useLocation();
 
   const [queryClient] = useState(() => new QueryClient({
     queryCache: new QueryCache({}),

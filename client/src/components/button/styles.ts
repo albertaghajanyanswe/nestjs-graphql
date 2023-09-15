@@ -1,5 +1,5 @@
 import { keyframes } from "@emotion/react";
-import { DefaultTheme, Theme } from "@mui/system";
+import { Theme } from "@mui/system";
 import { globalMuiStylesWithTheme } from "../../globalMuiStyles";
 
 const spin = keyframes`

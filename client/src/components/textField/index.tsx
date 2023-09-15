@@ -10,8 +10,6 @@ import {ReactComponent as VisibleOff24Svg} from '../../assets/form/visibility-of
 
 import { muiStyles } from './styles';
 import FormFieldTitle from '../fieldTitle';
-import { useTheme } from '@mui/material';
-import { Theme } from '@mui/system';
 
 interface iFormTextField<T> {
   name: Path<T>;
@@ -93,9 +91,7 @@ const FormTextField = <T extends FieldValues>({
     } else {
       return false
     }
-  }, [pattern])
-
-  const theme = useTheme();
+  }, [pattern, onChange])
 
   const sxStyle = (hasError: boolean) => {
     return {

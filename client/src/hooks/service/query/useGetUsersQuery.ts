@@ -39,7 +39,7 @@
 
 import { graphql } from "../../../gql";
 import genQuery from "../generators/genQuery";
-import { gql } from "@apollo/client"; // Import the gql tag from your GraphQL library
+// import { gql } from "@apollo/client"; // Import the gql tag from your GraphQL library
 
 export type UsersData = NonNullable<ReturnType<typeof useGetUsersQuery>["data"]>["list"][number];
 

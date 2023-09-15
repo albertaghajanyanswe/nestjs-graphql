@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
-import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
-import { Button, Box, Grid, Typography } from '@mui/material';
+import { Box, Grid, Typography } from '@mui/material';
 
 import M from '../../messages';
 import { getMessage } from "../../helpers/helper";
@@ -26,20 +26,19 @@ const LoginPage = () => {
 
   const styles = stylesWithTheme(theme);
   const navigate = useNavigate();
-  const location = useLocation();
 
   const methods = useForm({
     defaultValues: DEFAULT_VALUES_LOGIN,
     mode: 'onChange'
   });
 
-  const { handleSubmit, reset } = methods;
+  const { handleSubmit } = methods;
 
-  const { mutateAsync: mutateLogin, isLoading } = useLoginMutation();
+  const { mutateAsync: mutateLogin } = useLoginMutation();
 
-  const handleCloseModal = () => {
-    reset(DEFAULT_VALUES_LOGIN, { keepErrors: false, keepDirty: false });
-  }
+  // const handleCloseModal = () => {
+  //   reset(DEFAULT_VALUES_LOGIN, { keepErrors: false, keepDirty: false });
+  // }
 
   const handleSubmitLogin = useCallback(() => handleSubmit(async (data) => {
     try {
@@ -56,6 +55,7 @@ const LoginPage = () => {
       SystemMessage(enqueueSnackbar, getMessage(error?.response?.data || error.message), { variant: 'error' });
     }
     return true
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }), []);
 
   return (

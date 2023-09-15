@@ -3,9 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter, Routes, Router } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import CustomThemeProvider from '../src/configs/themes/CustomThemeProvider';
-import { Hydrate, QueryCache, QueryClient, QueryClientProvider, useQueryClient } from "@tanstack/react-query";
 import { Box } from '@mui/material';
 import { SnackbarProvider } from 'notistack';
 
@@ -27,10 +26,7 @@ root.render(
           }}
           maxSnack={4}
         >
-          {/* <Routes> */}
-            <App />
-          {/* </Routes> */}
-
+          <App />
         </Box>
       </CustomThemeProvider>
     </BrowserRouter>
