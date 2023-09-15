@@ -5,7 +5,6 @@ import CustomButton from '../../../components/button';
 import { isEmail, requiredErrMsg } from '../../../helpers/formHelper';
 import { iLogin } from '../../../configs/shared/types';
 import StepHOC from '../../../components/FormHOC';
-import { useLocation } from 'react-router-dom';
 
 
 interface iProps {
