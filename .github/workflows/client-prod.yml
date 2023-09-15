@@ -16,8 +16,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - name: cd client
-        run: cd client
+      working-directory: ./client
       - name: show files
         run: ls
       - name: install modules
