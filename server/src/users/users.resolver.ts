@@ -79,11 +79,7 @@ export class UsersResolver {
     @CurrentUser() { id, role }: UsersModel
   ): Promise<UsersDTO[]> {
     const user = await this.usersService.findUserByIdAndRole({ id, role });
-    if (
-      user &&
-      (user.role === UsersRoleType.ADMIN ||
-        user.role === UsersRoleType.SUPER_USER)
-    ) {
+    if (user) {
       return this.usersService.getAll();
     }
     throw new ErrorService({

@@ -24,6 +24,7 @@ function HomePage() {
   const { data, isLoading } = useGetUsersQuery({});
   const users = data?.list ?? [];
   console.log('users = ', typeof users)
+  console.log('users = ', users)
   return (
     <>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', p: 2, alignItems: 'center' }}>

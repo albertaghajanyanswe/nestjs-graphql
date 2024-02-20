@@ -10,12 +10,11 @@ interface iProps {
   sxLabel?: any;
   sx?: any;
   sxTooltip?: any;
-  isArabicInput?: boolean;
 }
-const FormFieldTitle: FC<iProps> = ({ title, helperTooltip = '', sxLabel = {}, sx = {}, sxTooltip = {}, isArabicInput = false }) => {
+const FormFieldTitle: FC<iProps> = ({ title, helperTooltip = '', sxLabel = {}, sx = {}, sxTooltip = {} }) => {
 
   return (
-    <Box component="div" sx={{...muiStyles.titleBlock, ...(isArabicInput ? muiStyles.arabicText : {}), ...sx}}>
+    <Box component="div" sx={{...muiStyles.titleBlock, ...sx}}>
       <FormLabel sx={{...muiStyles.title, ...sxLabel}}> {title} </FormLabel>
       {helperTooltip &&
         <Tooltip PopperProps={{ sx: {...muiStyles.tooltip, ...sxTooltip} }} title={helperTooltip}>

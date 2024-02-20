@@ -4,7 +4,7 @@ import { isLoggedIn } from './services/lsService';
 
 const PrivateRoute = ({ children }: { children: React.ReactNode}) => {
   const currentUser = isLoggedIn();
-
+  console.log('currentUser = ', currentUser)
   if (!currentUser) {
     return <Navigate to="/login" replace />;
   }

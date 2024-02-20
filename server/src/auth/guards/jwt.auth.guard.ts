@@ -14,6 +14,7 @@ export class JwtAuthGuard extends AuthGuard("jwt") {
   }
 
   handleRequest(err, user, info, context) {
+    console.log('\n\n user = ', user)
     context.switchToHttp().getRequest();
     const allowAny = this.reflector.get<string[]>(
       "allow-any",

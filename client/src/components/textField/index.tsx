@@ -40,7 +40,6 @@ interface iFormTextField<T> {
   showInputErrorIcon?: boolean;
   sxTooltip?: any;
   defaultValue?: string;
-  isArabicInput?: boolean;
   insideSpan?: boolean;
   pattern?: string | RegExp;
 }
@@ -74,7 +73,6 @@ const FormTextField = <T extends FieldValues>({
   showInputErrorIcon = true,
   sxTooltip = {},
   defaultValue = '',
-  isArabicInput = false,
   insideSpan = false,
   pattern,
 }: iFormTextField<T>) => {
@@ -100,7 +98,6 @@ const FormTextField = <T extends FieldValues>({
         ...((hasError || withEyeIcon) && { pr: 2 }),
         ...(multiline && muiStyles.textArea),
         ...((multiline && !withHelperText) && muiStyles.textAreaWithErrorIcon),
-        ...(isArabicInput ? muiStyles.arabicInput : {}),
         ...sx,
         ...((StartIcon && muiStyles.inputWithStartIcon)),
         borderRadius: `${borderRadius}px`,
@@ -116,7 +113,7 @@ const FormTextField = <T extends FieldValues>({
 
   return (
     <Box component={insideSpan ? "span" : "div"} sx={{ ...muiStyles.fieldContainer, ...sxContainer, ...(insideSpan ? { lineHeight: size === 'small' ? '40px' : '48px' } : {}) }}>
-      {title && !insideSpan && <FormFieldTitle sxLabel={sxTitle} title={title} helperTooltip={helperTooltip} sxTooltip={sxTooltip} isArabicInput={isArabicInput} />}
+      {title && !insideSpan && <FormFieldTitle sxLabel={sxTitle} title={title} helperTooltip={helperTooltip} sxTooltip={sxTooltip} />}
       <TextField
         id={name}
         name={name}
